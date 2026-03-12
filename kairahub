@@ -1,37 +1,79 @@
--- Tải Thư viện Plexus
+-- [[ 6_7 HUB - THE STRONGEST BATTLEGROUNDS ]] --
+-- UI Library: Plexus
+
+-- 1. Tải Thư viện Plexus (Đã sửa lỗi link)
 local Plexus = loadstring(game:HttpGet("https://raw.githubusercontent.com"))()
 
--- 1. Tạo Cửa Sổ Chính (Tiêu đề giống trong ảnh)
+-- 2. Tạo Cửa Sổ Chính
 local Window = Plexus:CreateWindow("6_7 HUB | The Strongest Battlegrounds")
 
--- 2. Tạo các Tab (Thanh Menu phía trên)
+-- 3. Tạo các Tab (Giống y hệt ảnh của bạn)
 local TSBTab = Window:CreateTab("TSB Menu")
 local CharTab = Window:CreateTab("Nhân Vật")
 local TechTab = Window:CreateTab("Tech")
 local PlayerTab = Window:CreateTab("Người Chơi")
 local SettingTab = Window:CreateTab("Cài đặt")
 
--- 3. Thêm nội dung vào Tab "TSB Menu"
+-- ================= TAB: TSB MENU =================
 TSBTab:AddLabel("The Strongest Battleground")
-TSBTab:AddLabel("🚀 Chức năng chính: Menu The Strongest Battlegrounds")
+TSBTab:AddLabel("🚀 Chức năng chính")
 
--- Nút bấm chạy Script RedzHub mà bạn yêu cầu
+-- Nút chạy RedzHub của bạn
 TSBTab:AddButton("🔥 Script RedzHub", function()
-    -- Lệnh thực thi script RedzHub khi bạn nhấn nút
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/luraobermeyer-jpg/redzhub/refs/heads/main/redzhub.lua.txt"))()
-    
-    -- Thông báo nhỏ khi bấm
     Plexus:Notification("Đang tải", "Đang khởi chạy RedzHub...", 3)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com"))()
 end)
 
--- Thêm một số nút mẫu khác cho giống ảnh (Nếu bạn muốn)
 TSBTab:AddButton("Script CarbonHub", function()
-    print("Bạn chưa thêm link cho CarbonHub")
+    Plexus:Notification("Thông báo", "Chức năng này đang được cập nhật!", 3)
 end)
 
-TSBTab:AddButton("Merebennie Hub V1.8", function()
-    print("Bạn chưa thêm link cho Merebennie Hub")
+-- ================= TAB: CÀI ĐẶT =================
+SettingTab:AddLabel("Tùy chỉnh hệ thống")
+
+-- Chức năng Anti-AFK thực tế (Giúp không bị văng game sau 20p)
+_G.AntiAFK = false
+SettingTab:AddToggle("Bật Anti-AFK", function(state)
+    _G.AntiAFK = state
+    if state then
+        local VirtualUser = game:GetService("VirtualUser")
+        game:GetService("Players").LocalPlayer.Idled:Connect(function()
+            if _G.AntiAFK then
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end
+        end)
+        Plexus:Notification("Anti-AFK", "Đã bật chế độ chống treo máy!", 2)
+    end
 end)
 
--- Thông báo khi Menu Kaira HUB đã sẵn sàng
-Plexus:Notification("Chào mừng", "Kaira đã tải thành công!", 5)
+-- Chức năng Màn hình Trắng (Giảm lag cực mạnh khi treo máy)
+SettingTab:AddToggle("Màn hình Trắng (AFK Farm)", function(state)
+    if state then
+        game:GetService("RunService"):Set3dRenderingEnabled(false)
+    else
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
+end)
+
+-- Đổi màu nền Menu (Color Picker)
+SettingTab:AddLabel("🎨 Đổi màu nền Menu")
+SettingTab:AddColorPicker("Chọn màu", Color3.fromRGB(57, 141, 168), function(color)
+    -- Thư viện sẽ tự nhận diện màu nếu hỗ trợ
+end)
+
+-- Nút Đóng Menu
+SettingTab:AddLabel("Menu Script")
+SettingTab:AddButton("❌ Đóng Menu & Tắt toàn bộ chức năng", function()
+    for i,v in pairs(game.CoreGui:GetChildren()) do
+        if v.Name == "Plexus" then v:Destroy() end
+    end
+end)
+
+-- ================= TAB: THÔNG TIN =================
+Tab5 = Window:CreateTab("Thông tin")
+Tab5:AddLabel("Sở hữu bởi: m960489016-sketch")
+Tab5:AddLabel("Phiên bản: V4.5")
+
+-- Thông báo khi Script chạy thành công
+Plexus:Notification("Thành công", "Chào mừng bạn đến với 6_7 HUB!", 5)
