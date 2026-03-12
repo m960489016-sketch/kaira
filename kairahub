@@ -1,0 +1,37 @@
+-- Tải Thư viện Plexus
+local Plexus = loadstring(game:HttpGet("https://raw.githubusercontent.com"))()
+
+-- 1. Tạo Cửa Sổ Chính (Tiêu đề giống trong ảnh)
+local Window = Plexus:CreateWindow("6_7 HUB | The Strongest Battlegrounds")
+
+-- 2. Tạo các Tab (Thanh Menu phía trên)
+local TSBTab = Window:CreateTab("TSB Menu")
+local CharTab = Window:CreateTab("Nhân Vật")
+local TechTab = Window:CreateTab("Tech")
+local PlayerTab = Window:CreateTab("Người Chơi")
+local SettingTab = Window:CreateTab("Cài đặt")
+
+-- 3. Thêm nội dung vào Tab "TSB Menu"
+TSBTab:AddLabel("The Strongest Battleground")
+TSBTab:AddLabel("🚀 Chức năng chính: Menu The Strongest Battlegrounds")
+
+-- Nút bấm chạy Script RedzHub mà bạn yêu cầu
+TSBTab:AddButton("🔥 Script RedzHub", function()
+    -- Lệnh thực thi script RedzHub khi bạn nhấn nút
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/luraobermeyer-jpg/redzhub/refs/heads/main/redzhub.lua.txt"))()
+    
+    -- Thông báo nhỏ khi bấm
+    Plexus:Notification("Đang tải", "Đang khởi chạy RedzHub...", 3)
+end)
+
+-- Thêm một số nút mẫu khác cho giống ảnh (Nếu bạn muốn)
+TSBTab:AddButton("Script CarbonHub", function()
+    print("Bạn chưa thêm link cho CarbonHub")
+end)
+
+TSBTab:AddButton("Merebennie Hub V1.8", function()
+    print("Bạn chưa thêm link cho Merebennie Hub")
+end)
+
+-- Thông báo khi Menu Kaira HUB đã sẵn sàng
+Plexus:Notification("Chào mừng", "Kaira đã tải thành công!", 5)
